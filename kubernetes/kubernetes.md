@@ -1,6 +1,6 @@
 # Kubernetes Notes
 
-### Basic Terminologies :
+## Basic Terminologies :
 
 **Kubernetes**
 - an open source orchestrator for deploying containerized applications
@@ -53,7 +53,7 @@
 - provide isolation and access control, so that each microservice can control the degree to which other services interact with it
 - a way to a Kubernetes user to organize different clusters within just one physical cluster
 
-### K8s Architecture
+## K8s Architecture :
 
 Kubernetes cluster have 2 types of nodes-
 1. **Master Node/Control Plane**
@@ -61,7 +61,7 @@ Kubernetes cluster have 2 types of nodes-
 
 ![alt text](https://github.com/ishtiaqhimel/notes/blob/master/images/K8s-architecture.png?raw=true "Kubernetes Architecture")
 
-#### About Control Plane Components
+### About Control Plane Components :
 
 **API Server**
 - Users interact with k8s cluster via API Server in master node
@@ -71,3 +71,38 @@ Kubernetes cluster have 2 types of nodes-
 - assigns pods to different nodes
 - checks the requirements of pods and find a node which meets the requirement to run the pod
 - schedules nodes so that the pods are distributed among all the nodes
+
+**Controller Manager**
+-  responsible for overall health of the cluster
+-  responsible for overall health of the cluster
+- Some types of these controllers are:
+	- Node controller: Responsible for noticing and responding when nodes go down
+	- Job controller: Watches for Job objects that represent one-off tasks, then creates Pods to run those tasks to completion
+	- EndpointSlice controller: Populates EndpointSlice objects (to provide a link between Services and Pods)
+	- ServiceAccount controller: Create default ServiceAccounts for new namespaces
+
+**Cloud Controller Manager** 
+- link cluster into cloud provider's API, and separates out the components that interact with that cloud platform from components that only interact with cluster
+
+**etcd**
+- brain of the cluster
+- key-value storage system
+- stores the current state of the cluster
+- stores nodes, controller and all the state related things
+- any component of cluster can query etcd
+
+### About Worker Node Components :
+**Kubelet**
+- an agent that runs on each node in the cluster
+- makes sure that containers are running in a Pod
+- takes a set of PodSpecs that are provided through various mechanisms and ensures that the containers described in those PodSpecs are running and healthy
+- tries to create a new pod if pod fails
+- if it can not restart failed pod, master detects a node failure and schedule the pod in another node
+
+**Kube-proxy**
+- a network proxy that runs on each node in cluster
+- responsible for maintaining network across the cluster
+- allow network communication to Pods from network sessions inside or outside of cluster
+
+**Container-Runtime (Docker)**
+- runs the container inside the pod
