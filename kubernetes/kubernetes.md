@@ -55,3 +55,19 @@
 
 ### K8s Architecture
 
+Kubernetes cluster have 2 types of nodes-
+1. **Master Node/Control Plane**
+2. **Worker Node**
+
+![alt text](https://github.com/ishtiaqhimel/notes/blob/master/images/K8s-architecture.png?raw=true "Kubernetes Architecture")
+
+#### About Control Plane Components
+
+**API Server**
+- Users interact with k8s cluster via API Server in master node
+- Client of this api server can be Kubernetes Dashboard(UI) or Kubectl(CLI) or any script
+
+**Scheduler**
+- assigns pods to different nodes
+- checks the requirements of pods and find a node which meets the requirement to run the pod
+- schedules nodes so that the pods are distributed among all the nodes
