@@ -126,8 +126,11 @@ Kubernetes cluster have 2 types of nodes-
 
 **Field Selectors**
 - Used to select k8s resources based on the value of one or more resource fields
+
 To get all the running pods
-`kubectl get pods --field-selector status.phase=Running`
+```shell
+kubectl get pods --field-selector status.phase=Running
+```
 
 **Finalizers**
 - Finalizers are namespaced keys that tell k8s to wait specific conditions are met before it fully deletes resources marked for deletion. It can be used as garbage collector
@@ -137,4 +140,12 @@ To get all the running pods
 - can store different information about the object in annotations
 - works like sort of comments . Build, release or image information like timestamps, release ID, registry address can be recorded in annotations
 
-
+**Pods**
+- the smallest deployable units of computing that you can create and manage in Kubernetes
+- a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers
+- The shared context of a Pod is a set of Linux namespaces, cgroups, and potentially other facets of isolation - the same things that isolate a container
+- A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
+- Each Pod is assigned a unique IP address. Containers inside a Pod can communicate between each other using localhost. Containers are not in same Pod can communicate using Pods IP addresses.
+- Pod is not a process but environment for running containers
+- Usually we don't need to create Pod manually. Deployment, StatefulSet and DaemonSet manages pods. PodTemplates are specification for creating Pods and are included in workload resources such as Deployment, StatefulSet, DaemonSet.
+- When the pod template is updated, the controller creates new pod based on updated template and replace the existing one.
