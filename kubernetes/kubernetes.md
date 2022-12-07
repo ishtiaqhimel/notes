@@ -106,3 +106,35 @@ Kubernetes cluster have 2 types of nodes-
 
 **Container-Runtime (Docker)**
 - runs the container inside the pod
+
+
+## Kubernetes Objects :
+- When create an object in Kubernetes, must provide the object spec that describes its desired state, as well as some basic information about the object (such as a name)
+- When use the Kubernetes API to create the object (either directly or via kubectl), that API request must include that information as JSON in the request body
+- Most often, provide the information to kubectl in a .yaml file. kubectl converts the information to JSON when making the API request
+
+**Namespace**
+- provides a mechanism for isolating groups of resources within a single cluster
+- Namespace-based scoping is applicable only for namespaced objects(i.e. Deployments, Services, etc.) and not for cluster -wide objects(e.g. StorageClass, Nodes, PersistentVolumes, etc.)
+- Each Kubernetes resources can only be in one namespace
+
+**Label**
+- Labels are key-value pairs that are attached to objects such as pods. Labels are intended to be used to identifying attributes of objects that are meaningful and relevant to users.
+
+**Label Selectors**
+- Using label selector, the client/user can identify a set of objects
+
+**Field Selectors**
+- Used to select k8s resources based on the value of one or more resource fields
+To get all the running pods
+`kubectl get pods --field-selector status.phase=Running`
+
+**Finalizers**
+- Finalizers are namespaced keys that tell k8s to wait specific conditions are met before it fully deletes resources marked for deletion. It can be used as garbage collector
+
+**Annotations**
+- Annotations can be used in k8s objects like key-value pair
+- can store different information about the object in annotations
+- works like sort of comments . Build, release or image information like timestamps, release ID, registry address can be recorded in annotations
+
+
