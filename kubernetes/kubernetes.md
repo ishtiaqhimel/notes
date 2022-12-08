@@ -114,9 +114,16 @@ Kubernetes cluster have 2 types of nodes-
 - Most often, provide the information to kubectl in a .yaml file. kubectl converts the information to JSON when making the API request
 
 **Namespace**
-- provides a mechanism for isolating groups of resources within a single cluster
+- organise resources in namespaces
+- virtual cluster inside a cluster
 - Namespace-based scoping is applicable only for namespaced objects(i.e. Deployments, Services, etc.) and not for cluster -wide objects(e.g. StorageClass, Nodes, PersistentVolumes, etc.)
 - Each Kubernetes resources can only be in one namespace
+- four default namespaces: kube-system, kube-public, kube-node-lease, default
+- kube-system: do not create or modify in kube-system, system processes
+- kube-public: publicely accessible data, a configmap, which contains cluster info
+- kube-node-lease: heartbeats of nodes, each node has associated lease object in namespace , detemines the availability of a node
+- default: resouces we  create are located here
+- we can create namespaces using configmap or kubectl command
 
 **Label**
 - Labels are key-value pairs that are attached to objects such as pods. Labels are intended to be used to identifying attributes of objects that are meaningful and relevant to users.
@@ -149,3 +156,11 @@ kubectl get pods --field-selector status.phase=Running
 - Pod is not a process but environment for running containers
 - Usually we don't need to create Pod manually. Deployment, StatefulSet and DaemonSet manages pods. PodTemplates are specification for creating Pods and are included in workload resources such as Deployment, StatefulSet, DaemonSet.
 - When the pod template is updated, the controller creates new pod based on updated template and replace the existing one.
+- Some Pods have init containers as well as app containers
+- Init containers run and complete before the app containers are started
+- The kubelet refuses to run a Pod where you have specified a Pod OS, if this isn't the same as the operating system for the node where that kubelet is running
+- Pod Topology Spread Constraint : Using topologyKey we can put pods on different zones and nodes.
+- Pod Termination : API Server updates the pod status and the pod in the api server is considered dead beyond grace period(30s). Kubelet notices the pod updates and start graceful shutdown. Control Plane removes the shutting-down Pod from Endpoints. The pod can no longer provide service. Other objects no longer consider the pod valid. When the graceful shutdown period is over, kubelet triggers forcible shutdown.
+- Pod Disruption Budget : Pod disruption budget tries to ensure a minimum number of pod running always. It prevents voluntary disruption such a directly deleting a pos or updating a deployment pod template causing restart. However, it can not prevent involuntary disruption such as hardware failure or kernel panic. Though it counts both disruption.
+
+

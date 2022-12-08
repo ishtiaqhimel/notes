@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app
+spec:
+  containers:
+  - name: my-app
+    image: ishtiaq99/go-api-server
+    ports:
+    - containerPort: 3000
