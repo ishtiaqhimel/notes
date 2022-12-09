@@ -71,6 +71,7 @@ Kubernetes cluster have 2 types of nodes-
 - assigns pods to different nodes
 - checks the requirements of pods and find a node which meets the requirement to run the pod
 - schedules nodes so that the pods are distributed among all the nodes
+- Kubernetes scheduler tries to ensure that Pods from the same application are distributed onto different machines for reliability
 
 **Controller Manager**
 -  responsible for overall health of the cluster
@@ -148,7 +149,7 @@ kubectl get pods --field-selector status.phase=Running
 - works like sort of comments . Build, release or image information like timestamps, release ID, registry address can be recorded in annotations
 
 **Pods**
-- the smallest deployable units of computing that you can create and manage in Kubernetes
+- the smallest deployable units of computing that we can create and manage in Kubernetes
 - a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers
 - The shared context of a Pod is a set of Linux namespaces, cgroups, and potentially other facets of isolation - the same things that isolate a container
 - A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
@@ -162,5 +163,5 @@ kubectl get pods --field-selector status.phase=Running
 - Pod Topology Spread Constraint : Using topologyKey we can put pods on different zones and nodes.
 - Pod Termination : API Server updates the pod status and the pod in the api server is considered dead beyond grace period(30s). Kubelet notices the pod updates and start graceful shutdown. Control Plane removes the shutting-down Pod from Endpoints. The pod can no longer provide service. Other objects no longer consider the pod valid. When the graceful shutdown period is over, kubelet triggers forcible shutdown.
 - Pod Disruption Budget : Pod disruption budget tries to ensure a minimum number of pod running always. It prevents voluntary disruption such a directly deleting a pos or updating a deployment pod template causing restart. However, it can not prevent involuntary disruption such as hardware failure or kernel panic. Though it counts both disruption.
-
+- “Will these containers work correctly if they land on different machines?” If the answer is no, a Pod is the correct grouping for the containers. If the answer is yes, using multiple Pods is probably the correct solution
 
