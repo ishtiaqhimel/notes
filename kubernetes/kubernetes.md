@@ -127,7 +127,7 @@ Kubernetes cluster have 2 types of nodes-
 - we can create namespaces using configmap or kubectl command
 
 **Label**
-- Labels are key-value pairs that are attached to objects such as pods. Labels are intended to be used to identifying attributes of objects that are meaningful and relevant to users.
+- Labels are key-value pairs that are attached to objects such as Pods and ReplicaSets. Labels are intended to be used to identifying attributes of objects that are meaningful and relevant to users.
 
 **Label Selectors**
 - Using label selector, the client/user can identify a set of objects
@@ -165,3 +165,7 @@ kubectl get pods --field-selector status.phase=Running
 - Pod Disruption Budget : Pod disruption budget tries to ensure a minimum number of pod running always. It prevents voluntary disruption such a directly deleting a pos or updating a deployment pod template causing restart. However, it can not prevent involuntary disruption such as hardware failure or kernel panic. Though it counts both disruption.
 - “Will these containers work correctly if they land on different machines?” If the answer is no, a Pod is the correct grouping for the containers. If the answer is yes, using multiple Pods is probably the correct solution
 
+**Labels and Annotations**
+- In Kubernetes, labels are key/value pairs that can be attached to objects, such as Pods and ReplicaSets. Labels are used to identify and organize Kubernetes objects, and can be used to filter and query them. Labels are often used to specify the characteristics of an object, such as its environment (e.g. production or staging), its role (e.g. frontend or backend), or its version (e.g. v1.0 or v2.0).
+- annotations are a way to attach metadata to an object, such as a Pod. Annotations are not intended to be used for filtering or querying Pods, as they are only a way to attach arbitrary non-identifying metadata to an object. Instead, labels are used for this purpose, as they allow Pods to be organized and queried based on their characteristics.
+- Label selectors are used to filter Kubernetes objects based on a set of labels. Selectors use a simple syntax for Boolean expressions.
