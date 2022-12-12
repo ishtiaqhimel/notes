@@ -22,7 +22,7 @@ Can we -
 - Scale up or down
 - Pause and Resume
 
-**Types**
+**Strategy Types**
 - Recreate
 - RollingUpdate (Ramped or Incremental)
 - Canary
@@ -40,7 +40,7 @@ metadata:
         app: nginx-app
 spec:
     replicas: 3
-    selectors: 
+    selector: 
         matchLabels: 
             app: nginx-app
     template:
@@ -53,7 +53,7 @@ spec:
             - name: nginx-container
               image: nginx:1.7.9
               ports: 
-            - containerPort: 80
+                - containerPort: 80
 ```
 
 **Create and Display**
@@ -64,25 +64,28 @@ spec:
 
 **Update Deployment**
 > nginx:1.7.9 -> nginx:1.9.1
-- `$ kubectl set image deploy nginx-deplyment nginx-container=nginx:1.9.1`
+- `$ kubectl set image deploy nginx-deploy nginx-container=nginx:1.9.1`
 
 or,
 
-- `$ kubectl edit deploy nginx-deployment`
-- `$ kubectl rollout status deployment/nginx-deployment`
+- `$ kubectl edit deploy nginx-deploy`
+- `$ kubectl rollout status deployment/nginx-deploy`
+
+or,
+- Just update the yaml file and write apply command
 
 **Rollback Deployment**
 > nginx:1.7.9 -> nginx:1.91
-- `$ kubectl set image deploy nginx-deplyment nginx-container=nginx:1.9.1 --record`
-- `$ kubectl rollout status deployment/nginx-deployment`
-- `$ kubectl rollout history deployment/nginx-deployment`
-- `$ kubectl rollout undo deployment/nginx-deployment`
-- `$ kubectl rollout status deployment/nginx-deployment`
+- `$ kubectl set image deploy nginx-deply nginx-container=nginx:1.9.1 --record`
+- `$ kubectl rollout status deployment/nginx-deploy`
+- `$ kubectl rollout history deployment/nginx-deploy`
+- `$ kubectl rollout undo deployment/nginx-deploy`
+- `$ kubectl rollout status deployment/nginx-deploy`
 
 
 **Scale up and down**
-- `kubectl scale deployments nginx-deployment --replicas=5`
-- `kubectl get disployments`
+- `kubectl scale deployments nginx-deploy --replicas=5`
+- `kubectl get deployments`
 
 **Delete**
 - `kubectl delete -f nginx-deploy.yaml`
