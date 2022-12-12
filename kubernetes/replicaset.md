@@ -31,7 +31,7 @@ metadata:
     name: nginx-rs
 spec:
     replicas: 3
-    selectors: 
+    selector: 
         matchLabels: 
             app: nginx-app
         matchExpressions:
@@ -47,7 +47,7 @@ spec:
             - name: nginx-container
               image: nginx
               ports: 
-            - containerPort: 80
+                - containerPort: 80
 ```
 
 **Create, Display and Inspect ReplicaSet**
