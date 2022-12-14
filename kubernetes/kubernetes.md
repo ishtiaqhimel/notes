@@ -148,23 +148,6 @@ kubectl get pods --field-selector status.phase=Running
 - can store different information about the object in annotations
 - works like sort of comments . Build, release or image information like timestamps, release ID, registry address can be recorded in annotations
 
-**Pods**
-- the smallest deployable units of computing that we can create and manage in Kubernetes
-- a group of one or more containers, with shared storage and network resources, and a specification for how to run the containers
-- The shared context of a Pod is a set of Linux namespaces, cgroups, and potentially other facets of isolation - the same things that isolate a container
-- A Pod is similar to a set of containers with shared namespaces and shared filesystem volumes.
-- Each Pod is assigned a unique IP address. Containers inside a Pod can communicate between each other using localhost. Containers are not in same Pod can communicate using Pods IP addresses.
-- Pod is not a process but environment for running containers
-- Usually we don't need to create Pod manually. Deployment, StatefulSet and DaemonSet manages pods. PodTemplates are specification for creating Pods and are included in workload resources such as Deployment, StatefulSet, DaemonSet.
-- When the pod template is updated, the controller creates new pod based on updated template and replace the existing one.
-- Some Pods have init containers as well as app containers
-- Init containers run and complete before the app containers are started
-- The kubelet refuses to run a Pod where you have specified a Pod OS, if this isn't the same as the operating system for the node where that kubelet is running
-- Pod Topology Spread Constraint : Using topologyKey we can put pods on different zones and nodes.
-- Pod Termination : API Server updates the pod status and the pod in the api server is considered dead beyond grace period(30s). Kubelet notices the pod updates and start graceful shutdown. Control Plane removes the shutting-down Pod from Endpoints. The pod can no longer provide service. Other objects no longer consider the pod valid. When the graceful shutdown period is over, kubelet triggers forcible shutdown.
-- Pod Disruption Budget : Pod disruption budget tries to ensure a minimum number of pod running always. It prevents voluntary disruption such a directly deleting a pos or updating a deployment pod template causing restart. However, it can not prevent involuntary disruption such as hardware failure or kernel panic. Though it counts both disruption.
-- “Will these containers work correctly if they land on different machines?” If the answer is no, a Pod is the correct grouping for the containers. If the answer is yes, using multiple Pods is probably the correct solution
-
 **Labels and Annotations**
 - In Kubernetes, labels are key/value pairs that can be attached to objects, such as Pods and ReplicaSets. Labels are used to identify and organize Kubernetes objects, and can be used to filter and query them. Labels are often used to specify the characteristics of an object, such as its environment (e.g. production or staging), its role (e.g. frontend or backend), or its version (e.g. v1.0 or v2.0).
 - annotations are a way to attach metadata to an object, such as a Pod. Annotations are not intended to be used for filtering or querying Pods, as they are only a way to attach arbitrary non-identifying metadata to an object. Instead, labels are used for this purpose, as they allow Pods to be organized and queried based on their characteristics.
