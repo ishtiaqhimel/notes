@@ -39,12 +39,41 @@ Overall, containers provide a convenient and effective way to package and deploy
     - Overlay
     - Custom
 - Docker Networking Model:
-Background 
+</br>Background 
 
-|  | Equality-based        | Set-Based     |
-| :---- |:-------------|:---------|
-| Operators  |  = == !=      | in notin exists |
-| Example      | environment=production <br/> tier!=frontend      | environment in (production,qa) <br/> tier notin (frontend, backend) |
-| Command line | `$ kubectl get pods -l environment=production` | `$kubectl get pods -l environment in (production)` |
-| In manifest | <pre>`selector:`<br>  `environment: production`<br>  `tier: frontend`</pre> |<pre>`selector:`<br> `matchExpressions:`<br>  `- {key: environment, operator: In, values:[prod, qa]}`<br>  `- {key: tier, operator: NotIn, values: [frontend, backend]}`</pre> |
-|Supports | Services, Replication Controller | Job, Deployment, ReplicaSet, and DaemonSet|
+|  | Compute        | Network | Storage     |
+|:-----|:-------|:-------|:-----|
+|VMware|ESX/ESXI|NSX|VSAN|
+|Docker|Engine(app runtime)|Libnetwork|TBC(Infinite??)|
+
+Three pillers of Docker Network
+    
+    - CNM
+    - Libnetwork
+    - Drivers
+
+*CNM (Container Networking Model)*:
+</br>Grand Design/ DNA of Docker Networking
+
+| CNM | VS | CNI |
+|:----|:----|:---|
+|Container Network Model| aka | Container Network interface |
+| Docker | Speciality | K8s |
+| Docker Inc. | | Core OS Inc. |
+
+Three major construct:
+- Sandbox (Aka. Namespace(Linux))
+-  Endpoint (Network Interface (e.g. eth0))
+- Network (Connected endpoints)
+
+*Libnetwork*:
+</br> Real world implementation of CNM by Docker Inc. Cross-platform. Written in Go.
+</br>Central place for all Docker networking logic, API, UX etc.
+
+*Drivers*
+</br>Network Specific Detail
+- Overlay
+- MACVLAN
+- IPVLAN
+- Bridge 
+
