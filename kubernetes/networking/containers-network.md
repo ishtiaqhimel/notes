@@ -38,4 +38,13 @@ Overall, containers provide a convenient and effective way to package and deploy
     - IPvlan
     - Overlay
     - Custom
-- Docker Networking Model
+- Docker Networking Model:
+Background 
+
+|  | Equality-based        | Set-Based     |
+| :---- |:-------------|:---------|
+| Operators  |  = == !=      | in notin exists |
+| Example      | environment=production <br/> tier!=frontend      | environment in (production,qa) <br/> tier notin (frontend, backend) |
+| Command line | `$ kubectl get pods -l environment=production` | `$kubectl get pods -l environment in (production)` |
+| In manifest | <pre>`selector:`<br>  `environment: production`<br>  `tier: frontend`</pre> |<pre>`selector:`<br> `matchExpressions:`<br>  `- {key: environment, operator: In, values:[prod, qa]}`<br>  `- {key: tier, operator: NotIn, values: [frontend, backend]}`</pre> |
+|Supports | Services, Replication Controller | Job, Deployment, ReplicaSet, and DaemonSet|
