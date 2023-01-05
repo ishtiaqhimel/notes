@@ -48,3 +48,14 @@ Communication between the pods and the Kubelet is made possible by the CNI. Ther
 - The CNI plugin has two primary responsibilities: allocate and assign unique IP addresses for pods and ensure that routes exist within Kubernetes to each pod IP address
 - There are two broad categories of CNI network models: flat networks and overlay networks.
 - The CNI plugin is also responsible for calling IPAM plugins for IP addressing.
+- The CNI spec has a second interface, the IP Address Management (IPAM) interface, to reduce duplication of IP allocation code in CNI plugins.
+
+### Kube-proxy
+- kube-proxy is another per-node daemon in Kubernetes, like Kubelet. kube-proxy provides basic load balancing functionality within the cluster.
+- Most types of services have an IP address for the service, called the cluster IP address, which is not routable outside the cluster.
+- kube-proxy is responsible for routing requests to a service’s cluster IP address to healthy pods.
+- kube-proxy has four modes, which change its runtime mode and exact feature set: **userspace**, **iptables**, **ipvs**, and **kernelspace**.
+
+### NetworkPolicy
+- NetworkPolicy is a resource type in Kubernetes that contains allow-based firewall rules.
+- Users can add NetworkPolicy objects to restrict connections to and from pods.
