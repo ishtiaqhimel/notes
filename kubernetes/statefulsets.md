@@ -32,3 +32,4 @@ For two characteristics 1) predictable pod name and 2) fixed individual DNS name
 **Stateful applications not perfect for containerized environments**
 
 ### How to create?
+- `kubectl apply -f demo-statefulset.yaml`
