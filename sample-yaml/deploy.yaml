@@ -21,3 +21,5 @@ spec:
         image: nginx
         ports:
         - containerPort: 80
+      imagePullSecrets:
+      - name: pull-secret
