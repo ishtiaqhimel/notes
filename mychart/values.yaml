@@ -1,0 +1,12 @@
+Deployment : 
+  AppName: api-server
+  Image: ishtiaq99/go-api-server:latest
+ConfigMap :
+  Name : my-config-map
+  Volume: config-map-volume
+Service:
+  Name: my-service
+  ContainerPort: 3000
+  ServicePort: 3000
+ReplicaSet:
+  Replicas: 3

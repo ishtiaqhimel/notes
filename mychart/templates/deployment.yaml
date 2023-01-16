@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name}}-deployment
+  labels:
+    app: {{ .Values.Deployment.AppName}} #api-server
+spec:
+  replicas: {{ .Values.ReplicaSet.Replicas}} #3
+  selector:
+    matchLabels:
+      app: {{ .Values.Deployment.AppName}} #api-server
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.Deployment.AppName}} #api-server
+    spec:
+      containers:
+        - name: {{ .Values.Deployment.AppName}} #api-server
+          image: {{ .Values.Deployment.Image}} #ishtiaq99/go-api-server
+          ports:
+            - containerPort: {{ .Values.Service.ContainerPort }} #3000
+          volumeMounts:
+          - name: {{ .Values.ConfigMap.Volume }} #config-map-volume
+            mountPath: "/config"
+            readOnly: true
+      volumes: 
+        - name: {{.Values.ConfigMap.Volume}} #config-map-volume
+          configMap: 
+            name: {{.Values.ConfigMap.Name}} #my-config-map
