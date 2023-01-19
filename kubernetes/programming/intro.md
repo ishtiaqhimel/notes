@@ -25,4 +25,5 @@ No matter how complex or simple your controller is, these three steps—**read r
 </br>**Control Loops**: In the event of an unintended state change leading to a state drift, the system may autonomously determine and apply the set of mitigating actions leading to a state match. This process is called a control loop, a popular choice for the implementation of controllers.
 </br>**k8s Mechanism**:
 ![alt text](https://github.com/ishtiaqhimel/notes/blob/master/images/deployment-control-loops.png?raw=true "Deployment Control Loops")
+</br>**Operator**:An Operator is an application-specific controller that extends the Kubernetes API to create, configure, and manage instances of complex stateful applications on behalf of a Kubernetes user. It builds upon the basic Kubernetes resource and controller concepts but includes domain or application-specific knowledge to automate common tasks.
 
