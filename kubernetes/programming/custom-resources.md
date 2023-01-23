@@ -1,0 +1,3 @@
+## Using Custom Resources
+Custom Resources (CR) is one of the central extension mechanisms used throughout the Kubernetes ecosystem. Custom resources are used for small, in-house configuration objects without any corresponding controller logic—purely declaratively defined. CRs are stored in the same etcd instance as the main Kubernetes API resources and served by the same Kubernetes API server.
+</br>A CustomResourceDefinition (CRD) is a Kubernetes resource itself. It describes the available CRs in the cluster.
